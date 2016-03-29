@@ -1,0 +1,78 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.HabilidadesFragment">
+
+    <LinearLayout
+        android:id="@+id/linLayBuscarHabil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout style="@style/OutLinearLayoutHeader">
+
+            <TextView
+                android:id="@+id/title_habilidades"
+                style="@style/OutHeaderText"
+                android:text="@string/title_section_habilidades"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txv_num_documento_hab"
+            style="@style/OutLabelSpinner"
+            android:text="@string/title_num_doc"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/etxt_num_doc_hab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:ems="10"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnBuscarHabilidades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar Habilidades >>" />
+
+        <TextView
+            android:id="@+id/txv_num_documento_hab_encontrado"
+            style="@style/OutLabelSpinner"
+            android:text="@string/title_num_doc_hab"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txv_num_documento_hab_encontrado_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txv_nombre_encontrado"
+            style="@style/OutLabelSpinner"
+            android:text="@string/title_nom_colab_hab"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txv_nombre_encontrado_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ExpandableListView
+            android:id="@+id/lvExpHabilidades"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:groupIndicator="@drawable/list_view_group_habil_indicator"
+
+            />
+    </LinearLayout>
+
+</FrameLayout>

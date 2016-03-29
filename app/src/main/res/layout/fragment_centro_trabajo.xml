@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.CentroTrabajoFragment">
+
+    <LinearLayout
+        android:id="@+id/linCts"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/lnHeaderCts"
+            style="@style/OutLinearLayoutHeader">
+
+            <TextView
+                android:id="@+id/title_select_ct"
+                style="@style/OutHeaderText"
+                android:text="@string/title_select_ct"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lstvCentrosTrabajo"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="3dp"
+            android:divider="#EACA3B"
+            android:dividerHeight="2dp"
+            android:listSelector="@drawable/list_selector"></ListView>
+    </LinearLayout>
+
+    <!--    <Spinner
+            android:id="@+id/spCentroTrabajo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/imgv_centro_trabajo" />-->
+
+</FrameLayout>

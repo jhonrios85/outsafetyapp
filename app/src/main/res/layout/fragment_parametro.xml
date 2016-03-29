@@ -1,0 +1,36 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.ParametroFragment">
+
+    <LinearLayout
+        android:id="@+id/linParametros"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/linLayHeadParams"
+            style="@style/OutLinearLayoutHeaderSubtitle">
+
+            <TextView
+                android:id="@+id/title_parametro"
+                style="@style/OutHeaderText"
+                android:text="@string/title_header_parametros"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lstvParametros"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true"
+            android:divider="#EACA3B"
+            android:dividerHeight="1dp"
+            android:listSelector="@drawable/list_selector"></ListView>
+    </LinearLayout>
+</FrameLayout>

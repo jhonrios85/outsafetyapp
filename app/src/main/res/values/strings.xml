@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Outsafety App</string>
+
+    <string name="title_section_login">Login</string>
+    <string name="title_section_sincronizar">Sincronizar</string>
+    <string name="title_section_hacer_insp">Inspección</string>
+    <string name="title_section_centro_trabajo">Centro Trabajo</string>
+    <string name="title_section_colaboradores">Colaboradores</string>
+    <string name="title_section_habilidades">Habilidades</string>
+    <string name="title_section_control_acceso">Control Acceso</string>
+    <string name="title_section_hazard_id">Hazard ID</string>
+    <string name="title_section_observacion">Observación</string>
+    <string name="title_dialog_evidencia">Evidencias</string>
+    <string name="title_dialog_firmar">Firmar</string>
+    <string name="title_firmar_aceptar">Aceptar >></string>
+    <string name="title_area">Área</string>
+    <string name="title_num_doc">Ingrese numero Documento</string>
+    <string name="title_num_doc_hab">Documento</string>
+    <string name="title_nom_colab_hab">Nombre Colaborador</string>
+    <string name="title_area_contratista">Area/Contratista</string>
+    <string name="title_observacion_insp">Ingrese Observación</string>
+    <string name="title_riesgo">Riesgo</string>
+    <string name="title_inspeccion">Inspección</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_tomar_foto">Tomar Foto</string>
+
+    <string name="action_settings">Evidencias</string>
+    <string name="action_modo_off_on">Trabajar Offline</string>
+    <string name="action_borrar_foto">Borrar</string>
+    <string name="boton_continuar">Continuar >></string>
+    <string name="boton_finalizar">Finalizar >></string>
+
+    <string name="title_activity_splash">Splash</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_sync_down_database">Sincronizar Bases de datos</string>
+    <string name="title_select_ct">Seleccionar Centro de trabajo</string>
+    <string name="title_header_parametros">Parametros Cumplidos</string>
+    <string name="title_colaboradores_selected">Colaboradores Seleccionados</string>
+    <string name="title_section_configurar_inspeccion">Configurar Inspección</string>
+
+    <string name="title_select_config_insp">Hacer Inspección</string>
+
+    <string name="imgv_centro_trabajo">Logo CT</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="sync_dw_database">Este proceso envia al servidor las inspecciones realizadas en este equipo y actualiza la base de datos de los centros de trabajo seleccionados para trabajar OFFLINE. El tiempo de sincronización es mayor si selecciona varios CT.</string>
+
+</resources>

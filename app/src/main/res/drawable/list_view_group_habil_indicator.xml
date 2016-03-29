@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_expanded="true">
+        <layer-list>
+            <item android:bottom="10dp" android:drawable="@android:drawable/arrow_up_float" android:left="10dp" android:top="10dp"></item>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item android:bottom="10dp" android:drawable="@android:drawable/arrow_down_float" android:left="10dp" android:top="10dp"></item>
+        </layer-list>
+    </item>
+</selector>

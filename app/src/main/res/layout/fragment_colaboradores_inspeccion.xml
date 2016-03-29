@@ -1,0 +1,111 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.ColaboradoresInspeccionFragment">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linLayBuscarColab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout style="@style/OutLinearLayoutHeader">
+
+                <TextView
+                    android:id="@+id/title_colaboradores"
+                    style="@style/OutHeaderText"
+                    android:text="@string/title_section_colaboradores"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txv_num_documento"
+                style="@style/OutLabelSpinner"
+                android:text="@string/title_num_doc"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/etxt_num_doc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:ems="10" />
+
+            <Button
+                android:id="@+id/btnBuscarColaborador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buscar >>" />
+
+
+            <ListView
+                android:id="@+id/lstvColaboradorEncontrado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="10dp"
+                android:divider="#EACA3B"
+                android:dividerHeight="1dp"
+                android:listSelector="@drawable/list_selector"></ListView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linLayColaboradorSeleccionado"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/linLayBuscarColab"
+            android:layout_marginBottom="50dp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/linColabSeleccionadoList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout style="@style/OutLinearLayoutHeaderSubtitle">
+
+                    <TextView
+                        android:id="@+id/title_colaboradores_selected"
+                        style="@style/OutHeaderText"
+                        android:text="@string/title_colaboradores_selected"
+                        android:textAppearance="?android:attr/textAppearanceListItem" />
+
+                </LinearLayout>
+
+
+                <ListView
+                    android:id="@+id/lstvColaboradoresSeleccionados"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:divider="#EACA3B"
+                    android:dividerHeight="1dp"
+                    android:listSelector="@drawable/list_selector"></ListView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_continuar_fin_insp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/boton_continuar" />
+    </RelativeLayout>
+
+
+</FrameLayout>

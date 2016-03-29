@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/txv_num_documento_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@null"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000000"
+        android:visibility="gone" />
+
+
+    <TextView
+        android:id="@+id/txv_nombre_selected"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.9"
+        android:text="@null"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <ImageView
+        android:id="@+id/img_view_firmado"
+        android:layout_width="20dip"
+        android:layout_height="20dip"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop"
+        android:src="@android:drawable/presence_online"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/imbtn_firmar"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_gravity="center_vertical|right"
+        android:layout_weight="0.1"
+        android:scaleType="centerCrop"
+        android:src="@drawable/firmar_inspeccion"
+
+        />
+
+
+    <TextView
+        android:id="@+id/txv_hidden_posicion_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@null"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000000"
+        android:visibility="gone" />
+
+
+    <ImageButton
+        android:id="@+id/imbtn_remove_sel"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_gravity="center_vertical|right"
+        android:layout_weight="0.1"
+        android:scaleType="centerCrop"
+        android:src="@android:drawable/ic_delete" />
+
+    <TextView
+        android:id="@+id/txv_hidden_firma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@null"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000000"
+        android:visibility="gone" />
+
+
+</LinearLayout>

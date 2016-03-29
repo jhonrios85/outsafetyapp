@@ -1,0 +1,89 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.EvidenciasFragment">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:minHeight="100dip">
+
+
+        <ImageView
+            android:id="@+id/imageViewEvidencia"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/buttonTakePic"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="1dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginTop="30dip"
+            android:paddingTop="10dp"
+
+            />
+
+        <ImageButton
+            android:id="@+id/buttonTakePic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/gallery_relative_layout"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:onClick="OpenCam"
+            android:src="@android:drawable/ic_menu_camera" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/gallery_relative_layout"
+            android:layout_marginTop="300dp"
+            android:background="#000000" />
+
+        <RelativeLayout
+            android:id="@+id/gallery_relative_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="100dip"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:paddingTop="10dip">
+
+            <HorizontalScrollView
+                android:id="@+id/hor_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip">
+
+                <LinearLayout
+                    android:id="@+id/gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dip">
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout style="@style/OutLinearLayoutHeaderDialog">
+
+        <TextView
+            android:id="@+id/title_dialog_evidencias"
+            style="@style/OutHeaderText"
+            android:text="@string/title_dialog_evidencia"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="right|top"
+        android:contentDescription="X"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+</FrameLayout>

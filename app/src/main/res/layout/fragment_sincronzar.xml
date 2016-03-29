@@ -1,0 +1,79 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.SincronzarFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout style="@style/OutLinearLayoutHeader">
+
+                <TextView
+                    android:id="@+id/title_sync_down_database"
+                    style="@style/OutHeaderText"
+                    android:text="@string/title_sync_down_database"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+
+            <ImageButton
+                android:id="@+id/img_dw_database"
+                android:layout_width="134dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_weight="3.69"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:cropToPadding="false"
+                android:scaleType="fitXY"
+                android:src="@mipmap/sync_down_db" />
+
+            <ImageButton
+                android:id="@+id/img_up_database"
+                android:layout_width="134dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_weight="3.69"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:cropToPadding="false"
+                android:scaleType="fitXY"
+                android:src="@mipmap/sync_up_db" />
+
+            <ImageButton
+                android:id="@+id/img_delete"
+                android:layout_width="134dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_weight="3.69"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:cropToPadding="false"
+                android:scaleType="fitXY"
+                android:src="@mipmap/delete_insp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

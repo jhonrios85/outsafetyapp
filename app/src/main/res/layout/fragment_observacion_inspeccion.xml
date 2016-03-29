@@ -1,0 +1,62 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.ObservacionInspeccionFragment">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linLayObservacion_insp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout style="@style/OutLinearLayoutHeader">
+
+                <TextView
+                    android:id="@+id/title_observacion_insp"
+                    style="@style/OutHeaderText"
+                    android:text="@string/title_section_observacion"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txv_observacion_insp"
+                style="@style/OutLabelSpinner"
+                android:text="@string/title_observacion_insp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/etxt_observacion_insp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal|top"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+            <CheckBox
+                android:id="@+id/checkBoxSinObs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sin Observación" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_finalizar_insp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/boton_finalizar" />
+    </RelativeLayout>
+
+
+</FrameLayout>

@@ -1,0 +1,108 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.FirmarFragment">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/firma_fondo_gradiente"
+        android:minHeight="100dip"
+        android:orientation="vertical"
+        android:paddingRight="15dip">
+
+
+        <android.gesture.GestureOverlayView
+            android:id="@+id/signaturePad"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="50dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginTop="50dip"
+            android:background="@android:color/white"
+            android:eventsInterceptionEnabled="true"
+            android:fadeEnabled="false"
+            android:fadeOffset="300000"
+            android:gestureColor="@android:color/black"
+            android:gestureStrokeLengthThreshold="0.1"
+            android:gestureStrokeType="multiple"
+            android:gestureStrokeWidth="2"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+        </android.gesture.GestureOverlayView>
+
+        <ImageView
+            android:id="@+id/imgViewFirma"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="50dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginTop="50dip"
+            android:background="@android:color/white"
+            android:eventsInterceptionEnabled="true"
+            android:fadeEnabled="false"
+            android:gestureColor="@android:color/black"
+            android:gestureStrokeLengthThreshold="0.1"
+            android:gestureStrokeType="multiple"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <ImageButton
+                android:id="@+id/imbtn_limpiar_firm"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_gravity="bottom|left"
+                android:layout_weight="2"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/ic_menu_delete" />
+
+            <Button
+                android:id="@+id/btnAceptar_firma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom"
+                android:layout_weight="3"
+                android:text="@string/title_firmar_aceptar" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout style="@style/OutLinearLayoutHeaderDialog">
+
+        <TextView
+            android:id="@+id/title_dialog_firmar"
+            style="@style/OutHeaderText"
+            android:text="@string/title_dialog_firmar"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right|top"
+        android:contentDescription="X"
+        android:paddingRight="15dip"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+
+</FrameLayout>

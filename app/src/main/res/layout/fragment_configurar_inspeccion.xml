@@ -1,0 +1,99 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.ConfigurarInspeccionFragment">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linConfigurarIns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout style="@style/OutLinearLayoutHeader">
+
+                <TextView
+                    android:id="@+id/title_config_insp"
+                    style="@style/OutHeaderText"
+                    android:text="@string/title_section_configurar_inspeccion"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txv_conf_ins_area"
+                style="@style/OutLabelSpinner"
+                android:text="@string/title_area"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Spinner
+                android:id="@+id/spinnerArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top" />
+
+            <TextView
+                android:id="@+id/txv_conf_ins_riesgo"
+                style="@style/OutLabelSpinner"
+                android:layout_marginTop="5dp"
+                android:text="@string/title_riesgo"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Spinner
+                android:id="@+id/spinnerRiesgo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top" />
+
+            <TextView
+                android:id="@+id/txv_conf_ins_inspeccion"
+                style="@style/OutLabelSpinner"
+                android:layout_marginTop="5dp"
+                android:text="@string/title_inspeccion"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Spinner
+                android:id="@+id/spinnerInspeccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:layout_marginBottom="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linLayParametros"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/linConfigurarIns"
+            android:layout_marginBottom="50dp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <fragment
+                android:id="@+id/parametro_fragment"
+                android:name="co.com.appsource.outsafetyapp.ParametroFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_parametro" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_continuar_sel_colab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/boton_continuar" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

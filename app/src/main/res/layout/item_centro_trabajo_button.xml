@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCentroTrabajo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_select_ct"
+            android:text="CentroTrabajo"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txv_lb_id_centro_trabajo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@null"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,164 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.com.appsource.outsafetyapp.ControlIngresoFragment">
+
+    <LinearLayout
+        android:id="@+id/linLayControlAcceso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout style="@style/OutLinearLayoutHeader">
+
+            <TextView
+                android:id="@+id/title_control_acceso"
+                style="@style/OutHeaderText"
+                android:text="@string/title_section_control_acceso"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txv_sel_ct_acc"
+            style="@style/OutLabelSpinner"
+            android:text="@string/title_section_centro_trabajo"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Spinner
+            android:id="@+id/spinnerCentroTrabajoAcc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txv_num_documento_reg"
+            style="@style/OutLabelSpinner"
+            android:text="@string/title_num_doc"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etxt_num_doc_reg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:layout_weight="10"
+                android:ems="10"
+                android:inputType="number" />
+
+            <ImageButton
+                android:id="@+id/imbtnScanCedula"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right"
+                android:layout_weight="2"
+                android:src="@drawable/barcode_scan" />
+        </TableRow>
+
+        <RadioGroup
+            android:id="@+id/radioGroupAccion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <RadioButton
+                android:id="@+id/rbtnEntrada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Entrada" />
+
+            <RadioButton
+                android:id="@+id/rbtnSalida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Salida" />
+
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Escanear Carnet"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar" />
+
+        <TextView
+            android:id="@+id/txv_num_documento_hab_encontrado"
+            style="@style/OutLabelSpinner"
+            android:text="@string/title_num_doc_hab"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txv_num_documento_hab_encontrado_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txv_nombre_encontrado"
+            style="@style/OutLabelSpinner"
+            android:text="@string/title_nom_colab_hab"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txv_nombre_encontrado_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txv_area_contratista"
+            style="@style/OutLabelSpinner"
+            android:text="@string/title_area_contratista"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txv_area_contratista_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnIngresar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="Entrar" />
+
+            <Button
+                android:id="@+id/btnSalir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="Salir" />
+        </TableRow>
+
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,32 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@android:color/white"
+    tools:context="co.com.appsource.outsafetyapp.Splash">
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            tools:ignore="UselessParent"
+            android:weightSum="1">
+            <ImageView
+                android:id="@+id/imageButton_speak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:background="@drawable/logo_splash"
+                android:layout_weight="10.90"
+                android:src="@drawable/logo_splash" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

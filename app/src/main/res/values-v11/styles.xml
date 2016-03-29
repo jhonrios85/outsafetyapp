@@ -1,0 +1,58 @@
+<resources>
+
+    <style name="FullscreenTheme" parent="android:Theme.Holo">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="android:Widget.Holo.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="OutLinearLayoutHeader">
+        <item name="android:background">@drawable/main_header_selector</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="OutLinearLayoutHeaderDialog">
+        <item name="android:background">@drawable/main_header_selector</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">left|top</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="OutLinearLayoutHeaderSubtitle">
+        <item name="android:background">@drawable/subtitle_header_selector</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="OutHeaderText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:layout_weight">3.69</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="OutLabelSpinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:background">@drawable/selector_label_spinner</item>
+    </style>
+
+</resources>

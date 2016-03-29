@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_dummie_off"
+        android:icon="@drawable/btn_power_off"
+        android:title="Trabajar Offline"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_dummie_on"
+        android:icon="@drawable/btn_power_on"
+        android:title="Trabajar Online"
+        app:showAsAction="always" />
+
+</menu>
