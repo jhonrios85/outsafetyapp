@@ -57,6 +57,11 @@ public class OutSafetyUtils {
     public static String CONS_JSON_GET_PERSONAS = "GetPersonas(strCedula=%s,idCentroTrabajo=%s)";
     public static String CONS_JSON_GET_HABILIDADES = "GetHabilidades(strCedula=%s,idCentroTrabajo=%s)";
     public static String CONS_JSON_GET_INSPECCIONES = "GetInspecciones(idCentroTrabajo=%s,idRiesgo=%s)";
+    public static String CONS_JSON_VALIDAR_PERSONA = "ValidarPersona(idpersona=%s,passwd=%s)";
+    public static String CONS_JSON_GET_AREAS = "GetAreasByEmpresa(idCentroTrabajo=%s)";
+    public static String CONS_JSON_GET_RIESGOS = "GetRiesgosByEmpresa(idCentroTrabajo=%s)";
+    public static String CONS_JSON_GET_PARAMETROS = "GetParametros(idCentroTrabajo=%s,idInspeccion=%s)";
+    public static String CONS_JSON_GET_CENTROS_TRABAJO = "GetCentrosTrabajoByPersona(strCedula=%s)";
 
     public static String CONS_SOAP_DATABASE_NAME = "outsafety.db";
 
