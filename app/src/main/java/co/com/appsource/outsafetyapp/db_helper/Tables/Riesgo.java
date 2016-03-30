@@ -1,5 +1,7 @@
 package co.com.appsource.outsafetyapp.db_helper.Tables;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by JANUS on 27/11/2015.
  */
@@ -19,8 +21,14 @@ public class Riesgo {
     public static final String COLUMN_ID_CENTRO_TRABAJO = "strIdCentroTrabajo";
 
     private long id;
+
+    @SerializedName("intIdRiesgo")
     private String intIdRiesgo;
+
+    @SerializedName("strDescripcionRiesgo")
     private String strDescripcionRiesgo;
+
+    @SerializedName("strIdCentroTrabajo")
     private String strIdCentroTrabajo;
 
     public String getStrIdCentroTrabajo() {

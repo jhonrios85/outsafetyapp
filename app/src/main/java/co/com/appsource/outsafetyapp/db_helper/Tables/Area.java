@@ -1,5 +1,7 @@
 package co.com.appsource.outsafetyapp.db_helper.Tables;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by JANUS on 26/11/2015.
  */
@@ -19,8 +21,14 @@ public class Area {
     public static final String COLUMN_DESCRIPCION = "strDescripcion";
 
     private long id;
+
+    @SerializedName("intIdEmpresa")
     private String intIdEmpresa;
+
+    @SerializedName("intIdArea")
     private String intIdArea;
+
+    @SerializedName("strDescripcion")
     private String strDescripcion;
 
 

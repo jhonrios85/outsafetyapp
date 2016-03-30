@@ -166,123 +166,41 @@ public class AsyncExecuteGetConfigurarInspeccion extends AsyncTask<String, Void,
             return newInputConfigurarInspeccion;
         }
 
-        SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE, OPERATION_NAME_AREAS);
-        request.addProperty("operacion", OPERACION);
-        request.addProperty("centroTrabajo", intIdEmpresa);
-
-
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                SoapEnvelope.VER11);
-        envelope.dotNet = true;
-        envelope.setOutputSoapObject(request);
-
-        HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
-        SoapObject response = null;
-
         String errorMessage = "";
 
-        try {
-            httpTransport.call(SOAP_ACTION_AREAS, envelope);
-            response = (SoapObject) envelope.bodyIn;
-        } catch (Exception exception) {
-            errorMessage = exception.toString();
-            return null;
-        }
-
-        SoapObject responseSoap = (SoapObject) response;
-
-        int intCantidad = 0;
-        intCantidad = Integer.valueOf(String.valueOf(responseSoap.getPropertyCount()));
-
         List<Area> lstArea = new ArrayList<Area>();
+        objRestClient = new RestClient(String.format(OutSafetyUtils.CONS_URL_RESTFUL_JSON + OutSafetyUtils.CONS_JSON_GET_AREAS, intIdEmpresa));
+        RestfulResponse objRestfulResponse = null;
 
-        SoapObject root = null;
-        Area objArea = null;
-
-        if (intCantidad > 0) {
-            root = (SoapObject) responseSoap.getProperty(0);
-
-            int intCantidadAreas = 0;
-
-            if (((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getPropertyCount() > 0) {
-                intCantidadAreas = ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getPropertyCount();
-            }
-
-            for (int j = 0; j < intCantidadAreas; j++) {
-
-                org.ksoap2.serialization.SoapObject itemArea = (org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getProperty(j);
-
-                objArea = new Area();
-                objArea.setIntIdEmpresa(itemArea.getProperty(0).toString());
-                objArea.setIntIdArea(itemArea.getProperty(1).toString());
-                objArea.setStrDescripcion(itemArea.getProperty(2).toString());
-                objArea.setIntIdEmpresa(intIdEmpresa);
-                lstArea.add(objArea);
-            }
+        try {
+            objRestClient.Execute(RequestMethod.GET);
+            gson = new Gson();
+            objRestfulResponse = gson.fromJson(objRestClient.getResponse(), RestfulResponse.class);
+            lstArea = gson.fromJson(objRestfulResponse.value, new TypeToken<List<Area>>() {
+            }.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         //Riesgo
-
-        request = new SoapObject(WSDL_TARGET_NAMESPACE, OPERATION_NAME_RIESGO);
-        request.addProperty("operacion", OPERACION);
-        request.addProperty("centroTrabajo", intIdEmpresa);
-
-
-        envelope = new SoapSerializationEnvelope(
-                SoapEnvelope.VER11);
-        envelope.dotNet = true;
-        envelope.setOutputSoapObject(request);
-
-        httpTransport = new HttpTransportSE(SOAP_ADDRESS);
-        response = null;
-
-        errorMessage = "";
+        List<Riesgo> lstRiesgo = new ArrayList<Riesgo>();
+        objRestClient = new RestClient(String.format(OutSafetyUtils.CONS_URL_RESTFUL_JSON + OutSafetyUtils.CONS_JSON_GET_RIESGOS, intIdEmpresa));
+        objRestfulResponse = null;
 
         try {
-            httpTransport.call(SOAP_ACTION_RIESGOS, envelope);
-            response = (SoapObject) envelope.bodyIn;
-        } catch (Exception exception) {
-            errorMessage = exception.toString();
-            return null;
-        }
-
-        responseSoap = (SoapObject) response;
-
-        int intCantidadResultRiesgo = 0;
-        intCantidadResultRiesgo = Integer.valueOf(String.valueOf(responseSoap.getPropertyCount()));
-
-        List<Riesgo> lstRiesgo = new ArrayList<Riesgo>();
-
-        root = null;
-        Riesgo objRiesgo = null;
-
-        if (intCantidadResultRiesgo > 0) {
-            root = (SoapObject) responseSoap.getProperty(0);
-            if (root != null) {
-                if (root.getPropertyCount() > 1) {
-                    if (((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getPropertyCount() > 0) {
-
-                        int intCantidadRiesgos = ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getPropertyCount();
-
-                        for (int k = 0; k < intCantidadRiesgos; k++) {
-
-                            org.ksoap2.serialization.SoapObject itemRiesgo = (org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getProperty(k);
-
-                            objRiesgo = new Riesgo();
-                            objRiesgo.setIntIdRiesgo(itemRiesgo.getProperty(0).toString());
-                            objRiesgo.setStrDescripcionRiesgo(itemRiesgo.getProperty(1).toString());
-                            objRiesgo.setStrIdCentroTrabajo(intIdEmpresa);
-                            lstRiesgo.add(objRiesgo);
-                        }
-                    }
-                }
-            }
+            objRestClient.Execute(RequestMethod.GET);
+            gson = new Gson();
+            objRestfulResponse = gson.fromJson(objRestClient.getResponse(), RestfulResponse.class);
+            lstRiesgo = gson.fromJson(objRestfulResponse.value, new TypeToken<List<Riesgo>>() {
+            }.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         //Inspeccion
         List<Inspeccion> lstInspeccion = new ArrayList<Inspeccion>();
         objRestClient = new RestClient(String.format(OutSafetyUtils.CONS_URL_RESTFUL_JSON + OutSafetyUtils.CONS_JSON_GET_INSPECCIONES, intIdEmpresa.toString(), "null"));
-        RestfulResponse objRestfulResponse = null;
+        objRestfulResponse = null;
 
         try {
             objRestClient.Execute(RequestMethod.GET);
@@ -297,7 +215,6 @@ public class AsyncExecuteGetConfigurarInspeccion extends AsyncTask<String, Void,
         }
 
 
-        //Parametros
         List<Parametro> lstParametro = new ArrayList<Parametro>();
         List<Habilidad> lstHabilidad = new ArrayList<Habilidad>();
         List<Persona> lstPersonas = new ArrayList<Persona>();
@@ -322,69 +239,20 @@ public class AsyncExecuteGetConfigurarInspeccion extends AsyncTask<String, Void,
                     e.printStackTrace();
                 }
 
-                for (Inspeccion itemInspeccion : lstInspeccion
-                        ) {
+                //Parametros
+                objRestClient = new RestClient(String.format(OutSafetyUtils.CONS_URL_RESTFUL_JSON + OutSafetyUtils.CONS_JSON_GET_PARAMETROS, intIdEmpresa.toString(), "null"));
+                objRestfulResponse = null;
 
-                    //if (itemInspeccion.getIntIdEmpresa() == intIdEmpresa) {
+                try {
+                    objRestClient.Execute(RequestMethod.GET);
+                    gson = new Gson();
+                    objRestfulResponse = gson.fromJson(objRestClient.getResponse(), RestfulResponse.class);
+                    lstParametro= gson.fromJson(objRestfulResponse.value, new TypeToken<List<Parametro>>() {
+                    }.getType());
 
 
-                    request = new SoapObject(WSDL_TARGET_NAMESPACE, OPERATION_NAME_POR_INSPECCION);
-                    request.addProperty("operacion", OPERACION_POR_INSPECCION);
-                    request.addProperty("intIdInspeccion", itemInspeccion.getIntIdInspeccion());
-
-
-                    envelope = new SoapSerializationEnvelope(
-                            SoapEnvelope.VER11);
-                    envelope.dotNet = true;
-                    envelope.setOutputSoapObject(request);
-
-                    httpTransport = new HttpTransportSE(SOAP_ADDRESS);
-                    response = null;
-
-                    errorMessage = "";
-
-                    try {
-                        httpTransport.call(SOAP_ACTION_POR_INSPECCION, envelope);
-                        response = (SoapObject) envelope.bodyIn;
-                    } catch (Exception exception) {
-                        errorMessage = exception.toString();
-                        return null;
-                    }
-
-                    responseSoap = (SoapObject) response;
-
-                    int intCantidadResultParams = 0;
-                    intCantidadResultParams = Integer.valueOf(String.valueOf(responseSoap.getPropertyCount()));
-
-                    Parametro objParametro = null;
-
-                    if (intCantidadResultParams > 0) {
-                        root = (SoapObject) responseSoap.getProperty(0);
-                        if (root.getPropertyCount() > 1) {
-                            if (((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getPropertyCount() > 0) {
-
-                                int intCantidadParametros = ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getPropertyCount();
-
-                                for (int k = 0; k < intCantidadParametros; k++) {
-                                    if (((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getPropertyCount() > k) {
-
-                                        org.ksoap2.serialization.SoapObject itemParametro = (org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getProperty(k);
-                                        objParametro = new Parametro();
-                                        objParametro.setIntIdParametro(itemParametro.getProperty(0).toString());
-
-                                        String descr = itemParametro.getProperty(1).toString();
-
-                                        if (descr.toUpperCase().equals("anyType{}".toUpperCase())) {
-                                            descr = "";
-                                        }
-                                        objParametro.setStrDescripcionParametro(descr);
-                                        objParametro.setIntIdInspeccion(itemInspeccion.getIntIdInspeccion());
-                                        lstParametro.add(objParametro);
-                                    }
-                                }
-                            }
-                        }
-                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
                 //Habilidades

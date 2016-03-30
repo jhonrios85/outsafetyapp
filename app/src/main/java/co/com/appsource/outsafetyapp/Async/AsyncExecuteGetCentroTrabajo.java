@@ -4,6 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -13,14 +16,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.com.appsource.outsafetyapp.complete.CentroTrabajoComplete;
+import co.com.appsource.outsafetyapp.custom_objects.RestfulResponse;
 import co.com.appsource.outsafetyapp.db_helper.Tables.CentroTrabajo;
 import co.com.appsource.outsafetyapp.db_helper.Tables.CentroTrabajoDataSource;
+import co.com.appsource.outsafetyapp.db_helper.Tables.Inspeccion;
 import co.com.appsource.outsafetyapp.util.OutSafetyUtils;
+import co.com.appsource.outsafetyapp.util.RequestMethod;
+import co.com.appsource.outsafetyapp.util.RestClient;
 
 /**
  * Created by JANUS on 15/12/2015.
  */
 public class AsyncExecuteGetCentroTrabajo extends AsyncTask<String, Void, List<CentroTrabajo>> {
+
+    RestClient objRestClient;
+    Gson gson;
 
     String strUsuario = "";
     String strModoUso = "";
@@ -66,57 +76,18 @@ public class AsyncExecuteGetCentroTrabajo extends AsyncTask<String, Void, List<C
             return lstCentroTrabajo;
         }
 
-        SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE, OPERATION_NAME);
-        request.addProperty("idpersona", strUsuario);
-        request.addProperty("operacion", OPERACION);
-
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                SoapEnvelope.VER11);
-        envelope.dotNet = true;
-        envelope.setOutputSoapObject(request);
-
-        HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
-        SoapObject response = null;
-
-        String errorMessage = "";
+        List<CentroTrabajo> lstCentroTrabajo = new ArrayList<CentroTrabajo>();
+        objRestClient = new RestClient(String.format(OutSafetyUtils.CONS_URL_RESTFUL_JSON + OutSafetyUtils.CONS_JSON_GET_CENTROS_TRABAJO, "'" + strUsuario + "'"));
+        RestfulResponse objRestfulResponse = null;
 
         try {
-            httpTransport.call(SOAP_ACTION, envelope);
-            response = (SoapObject) envelope.bodyIn;
-        } catch (Exception exception) {
-            errorMessage = exception.toString();
-            return null;
-        }
-
-        SoapObject responseSoap = (SoapObject) response;
-
-        int intCantidad = 0;
-        intCantidad = Integer.valueOf(String.valueOf(responseSoap.getPropertyCount()));
-
-        List<CentroTrabajo> lstCentroTrabajo = new ArrayList<CentroTrabajo>();
-
-        SoapObject root = null;
-        CentroTrabajo objCentroTrabajo = null;
-        if (intCantidad > 0) {
-            root = (SoapObject) responseSoap.getProperty(0);
-
-            int intCantidadCts = 0;
-
-            if (((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getPropertyCount() > 0) {
-                intCantidadCts = ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getPropertyCount();
-            }
-
-
-            for (int i = 0; i < intCantidadCts; i++) {
-
-                org.ksoap2.serialization.SoapObject itemCentroTrabajo = (org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getProperty(i);
-
-                objCentroTrabajo = new CentroTrabajo();
-                objCentroTrabajo.setIntIdEmpresa(itemCentroTrabajo.getProperty(0).toString());
-                objCentroTrabajo.setIntIdPersona(itemCentroTrabajo.getProperty(1).toString());
-                objCentroTrabajo.setStrRazonSocial(itemCentroTrabajo.getProperty(2).toString());
-                lstCentroTrabajo.add(objCentroTrabajo);
-            }
+            objRestClient.Execute(RequestMethod.GET);
+            gson = new Gson();
+            objRestfulResponse = gson.fromJson(objRestClient.getResponse(), RestfulResponse.class);
+            lstCentroTrabajo = gson.fromJson(objRestfulResponse.value, new TypeToken<List<CentroTrabajo>>() {
+            }.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return lstCentroTrabajo;

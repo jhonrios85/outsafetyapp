@@ -1,5 +1,7 @@
 package co.com.appsource.outsafetyapp.db_helper.Tables;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by JANUS on 26/11/2015.
  */
@@ -29,13 +31,24 @@ public class Parametro {
     public static final String COLUMN_CUMPLE = "boolCumple";
 
     private long id;
+
+    @SerializedName("intIdParametro")
     private String intIdParametro;
+
+    @SerializedName("intIdInspeccion")
     private String intIdInspeccion;
+
     private String intIdRiesgo;
+
+    @SerializedName("strDescripcionParametro")
     private String strDescripcionParametro;
+
     private String strRutaImagen;
+
     private String intIdEmpresa;
+
     private String dtfecuser;
+
     private boolean boolCumple = true;
 
     public boolean isBoolCumple() {

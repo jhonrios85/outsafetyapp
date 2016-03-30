@@ -1,5 +1,7 @@
 package co.com.appsource.outsafetyapp.db_helper.Tables;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by JANUS on 25/11/2015.
  */
@@ -18,9 +20,15 @@ public class CentroTrabajo {
     public static final String COLUMN_ID_PERSONA = "intIdPersona";
     public static final String COLUMN_RAZON_SOCIAL = "strRazonSocial";
 
+    @SerializedName("intIdEmpresa")
     private String intIdEmpresa;
+
+    @SerializedName("intIdPersona")
     private String intIdPersona;
+
+    @SerializedName("strRazonSocial")
     private String strRazonSocial;
+
     private long id;
     private boolean boolSelectedCt;
 
