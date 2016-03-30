@@ -23,6 +23,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -34,9 +37,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import co.com.appsource.outsafetyapp.complete.LoginComplete;
+import co.com.appsource.outsafetyapp.custom_objects.RestfulResponse;
 import co.com.appsource.outsafetyapp.db_helper.SQLOutsafetyHelper;
 import co.com.appsource.outsafetyapp.db_helper.Tables.LoginDataSource;
 import co.com.appsource.outsafetyapp.util.OutSafetyUtils;
+import co.com.appsource.outsafetyapp.util.RequestMethod;
+import co.com.appsource.outsafetyapp.util.RestClient;
 
 
 /**
@@ -269,12 +275,6 @@ public class Login extends android.support.v4.app.Fragment implements LoginCompl
             @Override
             public void onClick(View v) {
 
-/*                if (OutSafetyUtils.ValidarConexion(getContext())) {
-                    new AsyncExecuteLogin(fragment, getContext()).execute(objEtxtUsuario.getText().toString()
-                            , objEtxtPassword.getText().toString());
-                } else {
-                    onTaskComplete(ValidarLoginLocal());
-                }*/
 
                 new AsyncExecuteLogin(fragment, getContext()).execute(objEtxtUsuario.getText().toString()
                         , objEtxtPassword.getText().toString()
@@ -325,6 +325,9 @@ class AsyncExecuteLogin extends AsyncTask<String, Void, co.com.appsource.outsafe
     String strPassword = "";
     String strModoUso = "";
 
+    RestClient objRestClient;
+    Gson gson;
+
     private Context mContext;
     ProgressDialog mProgress;
     private LoginComplete mCallback;
@@ -359,54 +362,29 @@ class AsyncExecuteLogin extends AsyncTask<String, Void, co.com.appsource.outsafe
             return currentLogin;
         }
 
-        SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE, OPERATION_NAME);
-        request.addProperty("idpersona", strUsuario);
-        request.addProperty("passwd", strPassword);
-
-
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                SoapEnvelope.VER11);
-        envelope.dotNet = true;
-        envelope.setOutputSoapObject(request);
-
-        HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
-        SoapObject response = null;
-
         String errorMessage = "";
-
-        try {
-            httpTransport.call(SOAP_ACTION, envelope);
-            response = (SoapObject) envelope.bodyIn;
-        } catch (Exception exception) {
-            errorMessage = exception.toString();
-            return null;
-        }
-
-        SoapObject responseSoap = (SoapObject) response;
-
-        int intCantidad = 0;
-        intCantidad = Integer.valueOf(String.valueOf(responseSoap.getPropertyCount()));
 
         co.com.appsource.outsafetyapp.db_helper.Tables.Login objLogin = null;
 
-        SoapObject root = null;
+        List<co.com.appsource.outsafetyapp.db_helper.Tables.Login> lstLogin = new ArrayList<co.com.appsource.outsafetyapp.db_helper.Tables.Login>();
 
-        if (intCantidad > 0) {
-            root = (SoapObject) responseSoap.getProperty(0);
 
-            int intCantidadPersonas = 0;
+        objRestClient = new RestClient(String.format(OutSafetyUtils.CONS_URL_RESTFUL_JSON + OutSafetyUtils.CONS_JSON_VALIDAR_PERSONA, "'" + strUsuario + "'", "'" + strPassword + "'"));
+        RestfulResponse objRestfulResponse = null;
 
-            if (((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getPropertyCount() > 0) {
-                intCantidadPersonas = ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getPropertyCount();
+        try {
+            objRestClient.Execute(RequestMethod.GET);
+            gson = new Gson();
+            objRestfulResponse = gson.fromJson(objRestClient.getResponse(), RestfulResponse.class);
+            lstLogin = gson.fromJson(objRestfulResponse.value, new TypeToken<List<co.com.appsource.outsafetyapp.db_helper.Tables.Login>>() {
+            }.getType());
+
+            if (lstLogin.size() > 0) {
+                objLogin = lstLogin.get(0);
             }
 
-            if (intCantidadPersonas > 0) {
-                org.ksoap2.serialization.SoapObject itemLogin = (org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getProperty(0);
-                objLogin = new co.com.appsource.outsafetyapp.db_helper.Tables.Login();
-                objLogin.setStrPassword(itemLogin.getProperty(0).toString());
-                objLogin.setStrCedula(itemLogin.getProperty(1).toString());
-                objLogin.setIntTipoPersona(itemLogin.getProperty(2).toString());
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return objLogin;

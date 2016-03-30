@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -139,7 +140,13 @@ public class ColaboradoresInspeccionFragment extends android.support.v4.app.Frag
                                          @Override
                                          public void onClick(View v) {
                                              EditText editDocumento = etxt_num_doc;
-                                             new AsyncExecuteGetPersona(currentColaboradoresInspeccionFragment, getActivity()).execute(editDocumento.getText().toString(), currentColaboradoresInspeccionFragment.intIdEmpresa, OutSafetyUtils.GetCurrentModoUso(getContext()));
+
+                                             if (!editDocumento.getText().toString().equals("")) {
+                                                 new AsyncExecuteGetPersona(currentColaboradoresInspeccionFragment, getActivity()).execute(editDocumento.getText().toString(), currentColaboradoresInspeccionFragment.intIdEmpresa, OutSafetyUtils.GetCurrentModoUso(getContext()));
+                                             } else {
+                                                 Toast.makeText(getActivity(), "Debe ingresar Num. de Documento!!", Toast.LENGTH_LONG).show();
+                                             }
+
                                          }
                                      }
         );
@@ -467,7 +474,7 @@ class AsyncExecuteGetPersona extends AsyncTask<String, Void, List<Persona>> {
 
         RestClient objRestClient = new RestClient(String.format(OutSafetyUtils.CONS_URL_RESTFUL_JSON + OutSafetyUtils.CONS_JSON_GET_PERSONAS, "'" + strCedula + "'", intIdCentroTrabajo));
         RestfulResponse objRestfulResponse = null;
-        List<Persona> lstPersonas=new ArrayList<Persona>();
+        List<Persona> lstPersonas = new ArrayList<Persona>();
 
         if (OutSafetyUtils.MODO_USO_OFFLINE.equals(strModoUso)) {
             PersonaDataSource objPersonaDataSource = new PersonaDataSource(mContext);

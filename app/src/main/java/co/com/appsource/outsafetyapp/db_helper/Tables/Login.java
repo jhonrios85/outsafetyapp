@@ -1,5 +1,7 @@
 package co.com.appsource.outsafetyapp.db_helper.Tables;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by JHONRIOS on 04/11/2015.
  */
@@ -50,8 +52,13 @@ public class Login {
         this.strPassword = strPassword;
     }
 
+    @SerializedName("strPassword")
     private String strPassword;
+
+    @SerializedName("strCedula")
     private String strCedula;
+
+    @SerializedName("intTipoPersona")
     private String intTipoPersona;
 
 }

@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -21,10 +24,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.com.appsource.outsafetyapp.complete.ParametroComplete;
+import co.com.appsource.outsafetyapp.custom_objects.RestfulResponse;
 import co.com.appsource.outsafetyapp.db_helper.Tables.Parametro;
 import co.com.appsource.outsafetyapp.db_helper.Tables.ParametroDataSource;
 import co.com.appsource.outsafetyapp.model.ParametroAdapter;
 import co.com.appsource.outsafetyapp.util.OutSafetyUtils;
+import co.com.appsource.outsafetyapp.util.RequestMethod;
+import co.com.appsource.outsafetyapp.util.RestClient;
 
 
 /**
@@ -183,6 +189,10 @@ public class ParametroFragment extends android.support.v4.app.Fragment implement
 
 class AsyncExecuteGetParametro extends AsyncTask<String, Void, List<Parametro>> {
 
+    RestClient objRestClient;
+    Gson gson;
+    RestfulResponse objRestfulResponse;
+
     String intIdInspeccion = "";
     String strModoUso = "";
     String intIdCentroTrabajo = "";
@@ -222,63 +232,20 @@ class AsyncExecuteGetParametro extends AsyncTask<String, Void, List<Parametro>> 
             return lstParametro;
         }
 
-        SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE, OPERATION_NAME_POR_INSPECCION);
-        request.addProperty("operacion", OPERACION_POR_INSPECCION);
-        request.addProperty("intIdInspeccion", intIdInspeccion);
-
-
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                SoapEnvelope.VER11);
-        envelope.dotNet = true;
-        envelope.setOutputSoapObject(request);
-
-        HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
-        SoapObject response = null;
-
-        String errorMessage = "";
-
-        try {
-            httpTransport.call(SOAP_ACTION_POR_INSPECCION, envelope);
-            response = (SoapObject) envelope.bodyIn;
-        } catch (Exception exception) {
-            errorMessage = exception.toString();
-            return null;
-        }
-
-        SoapObject responseSoap = (SoapObject) response;
-
-        int intCantidad = 0;
-        intCantidad = Integer.valueOf(String.valueOf(responseSoap.getPropertyCount()));
-
         List<Parametro> lstParametro = new ArrayList<Parametro>();
 
-        SoapObject root = null;
-        Parametro objParametro = null;
+        //Parametros
+        objRestClient = new RestClient(String.format(OutSafetyUtils.CONS_URL_RESTFUL_JSON + OutSafetyUtils.CONS_JSON_GET_PARAMETROS, "null", intIdInspeccion));
+        objRestfulResponse = null;
 
-        if (intCantidad > 0) {
-            root = (SoapObject) responseSoap.getProperty(0);
-            if (root != null) {
-                if (root.getPropertyCount() > 1) {
-                    if (((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getPropertyCount() > 0) {
-                        int intCantidadParametros = ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getPropertyCount();
-
-                        for (int k = 0; k < intCantidadParametros; k++) {
-
-                            org.ksoap2.serialization.SoapObject itemParametro = (org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) ((org.ksoap2.serialization.SoapObject) root.getProperty(1)).getProperty(0)).getProperty(k);
-                            objParametro = new Parametro();
-                            objParametro.setIntIdParametro(itemParametro.getProperty(0).toString());
-
-                            String descr = itemParametro.getProperty(1).toString();
-
-                            if (descr.toUpperCase().equals("anyType{}".toUpperCase())) {
-                                descr = "";
-                            }
-                            objParametro.setStrDescripcionParametro(descr);
-                            lstParametro.add(objParametro);
-                        }
-                    }
-                }
-            }
+        try {
+            objRestClient.Execute(RequestMethod.GET);
+            gson = new Gson();
+            objRestfulResponse = gson.fromJson(objRestClient.getResponse(), RestfulResponse.class);
+            lstParametro= gson.fromJson(objRestfulResponse.value, new TypeToken<List<Parametro>>() {
+            }.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return lstParametro;
