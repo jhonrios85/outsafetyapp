@@ -8,6 +8,7 @@ import android.util.Log;
 import co.com.appsource.outsafetyapp.db_helper.Tables.Area;
 import co.com.appsource.outsafetyapp.db_helper.Tables.CentroTrabajo;
 import co.com.appsource.outsafetyapp.db_helper.Tables.ControlIngreso;
+import co.com.appsource.outsafetyapp.db_helper.Tables.Empresa;
 import co.com.appsource.outsafetyapp.db_helper.Tables.Habilidad;
 import co.com.appsource.outsafetyapp.db_helper.Tables.Insp_Colaborador;
 import co.com.appsource.outsafetyapp.db_helper.Tables.Insp_Evidencia;
@@ -26,7 +27,7 @@ import co.com.appsource.outsafetyapp.util.OutSafetyUtils;
 public class SQLOutsafetyHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = OutSafetyUtils.CONS_SOAP_DATABASE_NAME;
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 12;
 
 
     public SQLOutsafetyHelper(Context context) {
@@ -55,6 +56,7 @@ public class SQLOutsafetyHelper extends SQLiteOpenHelper {
         db.execSQL(Parametro.DATABASE_CREATE_TBL_PARAMETRO);
         db.execSQL(Habilidad.DATABASE_CREATE_TBL_HABILIDAD);
         db.execSQL(ControlIngreso.DATABASE_CREATE_TBL_CONTROL_INGRESO);
+        db.execSQL(Empresa.DATABASE_CREATE_TBL_EMPRESA);
 
         db.execSQL(Insp_Colaborador.DATABASE_CREATE_TBL_INSP_COLABORADOR);
         db.execSQL(Insp_Evidencia.DATABASE_CREATE_TBL_INSP_EVIDENCIA);

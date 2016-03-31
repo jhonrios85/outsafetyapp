@@ -50,6 +50,7 @@ public class OutSafetyUtils {
     public static String CONS_URL_RESTFUL_SAVE_COLABORADORES_JSON = "http://www.out-safety.com/savePruebas/api/GuardarFirma";//Pruebas*/
 
     public static String CONS_URL_RESTFUL_JSON = "http://www.out-safety.com/query/sincronizacion/";//Produccion
+    public static String CONS_URL_RESTFUL_JSON_HAZARD_ID = "http://out-safety.com/query/api/BancoInspeccion/";//Produccion
     public static String CONS_URL_RESTFUL_SAVE_JSON = "http://www.out-safety.com/save/api/GuardarInspeccion";//Produccion
     public static String CONS_URL_RESTFUL_SAVE_ENVIDENCIAS_JSON = "http://www.out-safety.com/save/api/GuardarEvidencia";//Produccion
     public static String CONS_URL_RESTFUL_SAVE_COLABORADORES_JSON = "http://www.out-safety.com/save/api/GuardarFirma";//Produccion*/
@@ -62,6 +63,7 @@ public class OutSafetyUtils {
     public static String CONS_JSON_GET_RIESGOS = "GetRiesgosByEmpresa(idCentroTrabajo=%s)";
     public static String CONS_JSON_GET_PARAMETROS = "GetParametros(idCentroTrabajo=%s,idInspeccion=%s)";
     public static String CONS_JSON_GET_CENTROS_TRABAJO = "GetCentrosTrabajoByPersona(strCedula=%s)";
+    public static String CONS_JSON_GET_EMPRESAS_HAZARD_ID = "Clientes";
 
     public static String CONS_SOAP_DATABASE_NAME = "outsafety.db";
 

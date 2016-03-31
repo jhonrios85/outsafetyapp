@@ -4,10 +4,23 @@
     android:layout_height="match_parent"
     tools:context="co.com.appsource.outsafetyapp.HazardIdPortadaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="300dp"
+        android:orientation="vertical">
+        <!-- TODO: Update blank fragment layout -->
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar Empresa"
+            android:id="@+id/autoCompleteEmpresa" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/hello_blank_fragment" />
+    </LinearLayout>
 
 </FrameLayout>

@@ -94,7 +94,7 @@ public class HazardId extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        categories.add("1");
+        //categories.add("Portada");
 
         viewHazardId = inflater.inflate(R.layout.fragment_hazard_id, container, false);
         List<Fragment> fragments = buildFragments();
@@ -108,8 +108,8 @@ public class HazardId extends android.support.v4.app.Fragment {
         viewPager.setAdapter(objHazardIdPagerAdapter);
         Bundle b = new Bundle();
         b.putInt("position", 0);
-        String title = "asd";
-        objHazardIdPagerAdapter.add(HazardIdPortadaFragment.class, "", b);
+
+        objHazardIdPagerAdapter.add(HazardIdPortadaFragment.class, "Portada", b);
         objHazardIdPagerAdapter.notifyDataSetChanged();
 
 

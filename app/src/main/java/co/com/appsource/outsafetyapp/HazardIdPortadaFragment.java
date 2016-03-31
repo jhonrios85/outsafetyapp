@@ -7,6 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+
+import java.util.List;
+
+import co.com.appsource.outsafetyapp.Async.AsyncExecuteGetEmpresa;
+import co.com.appsource.outsafetyapp.complete.EmpresaComplete;
+import co.com.appsource.outsafetyapp.db_helper.Tables.Empresa;
+import co.com.appsource.outsafetyapp.db_helper.Tables.EmpresaDataSource;
+import co.com.appsource.outsafetyapp.model.EmpresaAdapter;
+import co.com.appsource.outsafetyapp.util.OutSafetyUtils;
 
 
 /**
@@ -17,7 +27,7 @@ import android.view.ViewGroup;
  * Use the {@link HazardIdPortadaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HazardIdPortadaFragment extends android.support.v4.app.Fragment {
+public class HazardIdPortadaFragment extends android.support.v4.app.Fragment implements EmpresaComplete {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,6 +38,10 @@ public class HazardIdPortadaFragment extends android.support.v4.app.Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    EmpresaAdapter objEmpresaAdapter;
+    AutoCompleteTextView autoCompleteEmpresa;
+    public View objHazardIdPortadaFragment = null;
 
     public HazardIdPortadaFragment() {
         // Required empty public constructor
@@ -63,8 +77,14 @@ public class HazardIdPortadaFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        objHazardIdPortadaFragment = inflater.inflate(R.layout.fragment_hazard_id_portada, container, false);
+
+        new AsyncExecuteGetEmpresa(this, getActivity()).execute(OutSafetyUtils.GetCurrentModoUso(getContext()));
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hazard_id_portada, container, false);
+        return objHazardIdPortadaFragment;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -89,6 +109,36 @@ public class HazardIdPortadaFragment extends android.support.v4.app.Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onTaskComplete(List<Empresa> result) {
+        if (result != null) {
+            EmpresaDataSource objEmpresaDataSource = new EmpresaDataSource(getContext());
+            objEmpresaDataSource.open();
+            for (Empresa itemEmpresa :
+                    result) {
+                objEmpresaDataSource.CreateEmpresa(itemEmpresa.getIntIdEmpresa()
+                        , itemEmpresa.getStrNit()
+                        , itemEmpresa.getStrRazonSocial()
+                        , itemEmpresa.getStrRepresentanteLegal()
+                        , itemEmpresa.getStrEmail()
+                        , itemEmpresa.getStrResponsableSiso()
+                        , itemEmpresa.getStrEmailResponsableSiso()
+                        , itemEmpresa.getBoolEstado()
+                        , itemEmpresa.getIntIdTipoEmpresa());
+            }
+
+            objEmpresaDataSource.close();
+
+            autoCompleteEmpresa = (AutoCompleteTextView) objHazardIdPortadaFragment.findViewById(R.id.autoCompleteEmpresa);
+
+            EmpresaDataSource objEmpresaDataSourceAdapter = new EmpresaDataSource(getContext());
+            objEmpresaAdapter = new EmpresaAdapter(objEmpresaDataSourceAdapter, getContext());
+
+            autoCompleteEmpresa.setAdapter(objEmpresaAdapter);
+            autoCompleteEmpresa.setOnItemClickListener(objEmpresaAdapter);
+        }
     }
 
     /**

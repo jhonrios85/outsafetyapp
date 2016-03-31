@@ -63,7 +63,9 @@ public class MainActivity extends AppCompatActivity
         , ObservacionInspeccionFragment.OnFragmentInteractionListener
         , HabilidadesFragment.OnFragmentInteractionListener
         , ControlIngresoFragment.OnFragmentInteractionListener
-        , HazardId.OnFragmentInteractionListener {
+        , HazardId.OnFragmentInteractionListener
+        , HazardIdPortadaFragment.OnFragmentInteractionListener {
+
     @Override
     public void onFragmentInteraction(Uri uri) {
 
