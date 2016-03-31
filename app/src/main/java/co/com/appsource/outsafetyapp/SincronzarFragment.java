@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import co.com.appsource.outsafetyapp.Async.AsyncExecuteEnviarCorreoInspeccion;
 import co.com.appsource.outsafetyapp.Async.AsyncExecuteGetCentroTrabajo;
 import co.com.appsource.outsafetyapp.Async.AsyncExecuteGetConfigurarInspeccion;
 import co.com.appsource.outsafetyapp.Async.AsyncExecuteGuardarColaboradoresInspeccion;
@@ -40,6 +41,7 @@ import co.com.appsource.outsafetyapp.Async.AsyncExecuteGuardarEvidenciasInspecci
 import co.com.appsource.outsafetyapp.Async.AsyncExecuteGuardarInspeccion;
 import co.com.appsource.outsafetyapp.complete.CentroTrabajoComplete;
 import co.com.appsource.outsafetyapp.complete.ConfigurarInspeccionComplete;
+import co.com.appsource.outsafetyapp.complete.EnviarMailComplete;
 import co.com.appsource.outsafetyapp.complete.GuardarColaboradoresComplete;
 import co.com.appsource.outsafetyapp.complete.GuardarControlAccesoComplete;
 import co.com.appsource.outsafetyapp.complete.GuardarEvidenciaComplete;
@@ -87,7 +89,7 @@ import co.com.appsource.outsafetyapp.util.OutSafetyUtils;
  * Use the {@link SincronzarFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SincronzarFragment extends android.support.v4.app.Fragment implements ConfigurarInspeccionComplete, CentroTrabajoComplete, GuardarInspeccionComplete, GuardarControlAccesoComplete, GuardarEvidenciaComplete, GuardarColaboradoresComplete {
+public class SincronzarFragment extends android.support.v4.app.Fragment implements ConfigurarInspeccionComplete, CentroTrabajoComplete, GuardarInspeccionComplete, GuardarControlAccesoComplete, GuardarEvidenciaComplete, GuardarColaboradoresComplete, EnviarMailComplete {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -112,6 +114,8 @@ public class SincronzarFragment extends android.support.v4.app.Fragment implemen
     public List<Insp_Inspeccion> lstInsp_InspeccionGuardar = new ArrayList<Insp_Inspeccion>();
     public int ctIndex = 0;
     public int controlIngIndex = 0;
+    public boolean boolEsInspeccionPositiva = true;
+    Long longIdInspeccionGuardada = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -487,6 +491,9 @@ public class SincronzarFragment extends android.support.v4.app.Fragment implemen
     }
 
     public void GuardarInspeccionesUnaPorUna() {
+        boolEsInspeccionPositiva = true;
+        longIdInspeccionGuardada = null;
+
         settings = getActivity().getSharedPreferences(OutSafetyUtils.PREFS_NAME, 0);
         strUsuario = settings.getString(OutSafetyUtils.SHARED_PREFERENCE_USERNAME, "");
 
@@ -518,6 +525,14 @@ public class SincronzarFragment extends android.support.v4.app.Fragment implemen
         objInsp_ParametroDataSource.open();
         lstInsp_Parametro = objInsp_ParametroDataSource.GetInsp_Parametro(newInspeccion.getId());
         objInsp_ParametroDataSource.close();
+
+        for (Insp_Parametro itemParam :
+                lstInsp_Parametro) {
+            if (!itemParam.isBoolCumple()) {
+                boolEsInspeccionPositiva = false;
+                break;
+            }
+        }
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String serialInsp_Parametro = gson.toJson(lstInsp_Parametro);
@@ -628,6 +643,13 @@ public class SincronzarFragment extends android.support.v4.app.Fragment implemen
                 objInsp_InspeccionDataSource.open();
                 objInsp_InspeccionDataSource.DeleteInsp_InspeccionByConsecutivoInsp(result.getIntIdInspeccionLocal());
                 objInsp_InspeccionDataSource.close();
+
+                if (!boolEsInspeccionPositiva) {
+                    if (longIdInspeccionGuardada > 0) {
+                        new AsyncExecuteEnviarCorreoInspeccion(this, getActivity()).execute(Long.toString(longIdInspeccionGuardada), OutSafetyUtils.GetCurrentModoUso(getContext()));
+                    }
+                }
+
 
                 if (contadorInspeccioes < lstInsp_InspeccionGuardar.size()) {
                     GuardarInspeccionesUnaPorUna();
@@ -805,6 +827,7 @@ public class SincronzarFragment extends android.support.v4.app.Fragment implemen
     @Override
     public void onTaskComplete(GuardarInspeccionResult result) {
         if (result.isExito()) {
+            longIdInspeccionGuardada = result.getIntIdInspeccion();
             GuardarEvidencias(result.getIntIdInspeccion(), result.getIntIdInspeccionLocal());
         } else {
             OutSafetyUtils.MostrarAlerta("No fue posible guardar las inspecciones, consulte con el administrador!!", getContext());
@@ -857,6 +880,11 @@ public class SincronzarFragment extends android.support.v4.app.Fragment implemen
         contadorColaboradores++;
 
         new AsyncExecuteGuardarColaboradoresInspeccion(this, getActivity()).execute(Long.toString(idInspeccionCampo), itemPersona.getStrFirmaBase64(), itemPersona.getStrCedula(), OutSafetyUtils.GetCurrentModoUso(getContext()), Long.toString(idInspeccionLocal));
+    }
+
+    @Override
+    public void onTaskComplete(Boolean result) {
+
     }
 
     /**

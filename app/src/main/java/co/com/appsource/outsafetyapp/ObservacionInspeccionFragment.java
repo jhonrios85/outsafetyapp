@@ -27,10 +27,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import co.com.appsource.outsafetyapp.Async.AsyncExecuteEnviarCorreoInspeccion;
 import co.com.appsource.outsafetyapp.Async.AsyncExecuteGuardarColaboradoresInspeccion;
 import co.com.appsource.outsafetyapp.Async.AsyncExecuteGuardarEncabezadoInspeccion;
 import co.com.appsource.outsafetyapp.Async.AsyncExecuteGuardarEvidenciasInspeccion;
 import co.com.appsource.outsafetyapp.Async.AsyncExecuteGuardarInspeccion;
+import co.com.appsource.outsafetyapp.complete.EnviarMailComplete;
 import co.com.appsource.outsafetyapp.complete.GuardarColaboradoresComplete;
 import co.com.appsource.outsafetyapp.complete.GuardarEvidenciaComplete;
 import co.com.appsource.outsafetyapp.complete.GuardarInspeccionComplete;
@@ -58,7 +60,7 @@ import co.com.appsource.outsafetyapp.util.OutSafetyUtils;
  * Use the {@link ObservacionInspeccionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ObservacionInspeccionFragment extends android.support.v4.app.Fragment implements GuardarInspeccionComplete, GuardarEvidenciaComplete, GuardarColaboradoresComplete {
+public class ObservacionInspeccionFragment extends android.support.v4.app.Fragment implements GuardarInspeccionComplete, GuardarEvidenciaComplete, GuardarColaboradoresComplete, EnviarMailComplete {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,7 +71,7 @@ public class ObservacionInspeccionFragment extends android.support.v4.app.Fragme
     private String mParam2;
 
     public String intIdEmpresa;
-    public boolean boolEsInspeccionPositiva;
+    public boolean boolEsInspeccionPositiva = true;
     View viewObservacionInspeccionFragment;
     Button btn_finalizar_insp = null;
     EditText etxt_observacion_insp = null;
@@ -85,6 +87,7 @@ public class ObservacionInspeccionFragment extends android.support.v4.app.Fragme
     Long longIdArea = null;
     Long longIdRiesgo = null;
     Long longIdInspeccion = null;
+    Long longIdInspeccionGuardada = null;
     String strObservacionGeneral = "";
     public HashSet<String> lstEvidencias = null;
     List<Persona> lstColaboradores = null;
@@ -253,6 +256,7 @@ public class ObservacionInspeccionFragment extends android.support.v4.app.Fragme
         } else {
             Boolean boolTest = result.isExito();
             if (boolTest) {
+                longIdInspeccionGuardada = result.getIntIdInspeccion();
                 GuardarEvidencias(result.getIntIdInspeccion());
             } else {
                 OutSafetyUtils.MostrarAlerta("No fue posible almacenar la inspección, intente de nuevo o consulte con el Administrador!!!", getContext());
@@ -282,9 +286,23 @@ public class ObservacionInspeccionFragment extends android.support.v4.app.Fragme
                     mProgress.dismiss();
                 }
                 OutSafetyUtils.MostrarAlerta("Se almacenó la inspección!!!", getContext());
-                IrACentrosTrabajo();
+
+                if (!boolEsInspeccionPositiva) {
+                    if (longIdInspeccionGuardada > 0) {
+                        new AsyncExecuteEnviarCorreoInspeccion(this, getActivity()).execute(Long.toString(longIdInspeccionGuardada), OutSafetyUtils.GetCurrentModoUso(getContext()));
+                    } else {
+                        IrACentrosTrabajo();
+                    }
+                } else {
+                    IrACentrosTrabajo();
+                }
             }
         }
+    }
+
+    @Override
+    public void onTaskComplete(Boolean result) {
+        IrACentrosTrabajo();
     }
 
 
@@ -541,6 +559,10 @@ public class ObservacionInspeccionFragment extends android.support.v4.app.Fragme
                     , itemParametro.isBoolCumple()
                     , newInspeccion.getId());
 
+            if (!itemParametro.isBoolCumple()) {
+                boolEsInspeccionPositiva = false;
+            }
+
             lstInsp_Parametro.add(newInsp_Parametro);
         }
         objInsp_ParametroDataSource.close();
@@ -549,6 +571,7 @@ public class ObservacionInspeccionFragment extends android.support.v4.app.Fragme
 
     public void GuardarInspeccionJSON() {
 
+        boolEsInspeccionPositiva = true;
         settings = getActivity().getSharedPreferences(OutSafetyUtils.PREFS_NAME, 0);
         strUsuario = settings.getString(OutSafetyUtils.SHARED_PREFERENCE_USERNAME, "");
         longIdCentroTrabajo = Long.parseLong(settings.getString(OutSafetyUtils.SHARED_PREFERENCE_CENTRO_TRABAJO, ""));
@@ -594,8 +617,12 @@ public class ObservacionInspeccionFragment extends android.support.v4.app.Fragme
                     , itemParametro.isBoolCumple()
                     , newInspeccion.getId());
 
+            if (!itemParametro.isBoolCumple()) {
+                boolEsInspeccionPositiva = false;
+            }
+
             //if (OutSafetyUtils.GetCurrentModoUso(getContext()) != OutSafetyUtils.MODO_USO_ONLINE) {
-                lstInsp_Parametro.add(newInsp_Parametro);
+            lstInsp_Parametro.add(newInsp_Parametro);
             //}
 
         }

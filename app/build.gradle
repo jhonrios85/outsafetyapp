@@ -8,8 +8,8 @@ android {
         applicationId "co.com.appsource.outsafetyapp"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 37
-        versionName "2.0.5"
+        versionCode 38
+        versionName "2.0.6"
     }
     buildTypes {
         release {

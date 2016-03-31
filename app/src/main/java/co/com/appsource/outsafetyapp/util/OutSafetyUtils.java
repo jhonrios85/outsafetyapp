@@ -51,6 +51,7 @@ public class OutSafetyUtils {
 
     public static String CONS_URL_RESTFUL_JSON = "http://www.out-safety.com/query/sincronizacion/";//Produccion
     public static String CONS_URL_RESTFUL_JSON_HAZARD_ID = "http://out-safety.com/query/api/BancoInspeccion/";//Produccion
+    public static String CONS_URL_RESTFUL_SAVE_ENVIAR_MAIL = "http://www.out-safety.com/save/sincronizacion/SendMailInspecccion(idInspeccion=%s)";//Produccion
     public static String CONS_URL_RESTFUL_SAVE_JSON = "http://www.out-safety.com/save/api/GuardarInspeccion";//Produccion
     public static String CONS_URL_RESTFUL_SAVE_ENVIDENCIAS_JSON = "http://www.out-safety.com/save/api/GuardarEvidencia";//Produccion
     public static String CONS_URL_RESTFUL_SAVE_COLABORADORES_JSON = "http://www.out-safety.com/save/api/GuardarFirma";//Produccion*/
