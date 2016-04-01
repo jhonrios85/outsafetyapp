@@ -83,6 +83,24 @@ public class AsyncExecuteGetEmpresa extends AsyncTask<String, Void, List<Empresa
             e.printStackTrace();
         }
 
+        EmpresaDataSource objEmpresaDataSource = new EmpresaDataSource(mContext);
+        objEmpresaDataSource.open();
+        objEmpresaDataSource.truncateTable();
+        for (Empresa itemEmpresa :
+                lstEmpresa) {
+            objEmpresaDataSource.CreateEmpresa(itemEmpresa.getIntIdEmpresa()
+                    , itemEmpresa.getStrNit()
+                    , itemEmpresa.getStrRazonSocial()
+                    , itemEmpresa.getStrRepresentanteLegal()
+                    , itemEmpresa.getStrEmail()
+                    , itemEmpresa.getStrResponsableSiso()
+                    , itemEmpresa.getStrEmailResponsableSiso()
+                    , itemEmpresa.getBoolEstado()
+                    , itemEmpresa.getIntIdTipoEmpresa());
+        }
+
+        objEmpresaDataSource.close();
+
         return lstEmpresa;
     }
 

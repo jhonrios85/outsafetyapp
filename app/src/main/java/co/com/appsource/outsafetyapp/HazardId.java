@@ -118,6 +118,20 @@ public class HazardId extends android.support.v4.app.Fragment {
         return viewHazardId;
     }
 
+    public Fragment getRegisteredFragment(int position) {
+        return (Fragment) objHazardIdPagerAdapter.getItem(position);
+    }
+
+    public void UpdateCustomerLogo(Uri uriImageLogo) {
+        HazardIdPortadaFragment objHazardIdPortadaFragment = (HazardIdPortadaFragment) getRegisteredFragment(0);
+        objHazardIdPortadaFragment.UpdateCustomerLogo(uriImageLogo);
+    }
+
+    public void UpdateCustomerPortadaImagae(Uri uriImageLogo) {
+        HazardIdPortadaFragment objHazardIdPortadaFragment = (HazardIdPortadaFragment) getRegisteredFragment(0);
+        objHazardIdPortadaFragment.UpdateCustomerPortadaImage(uriImageLogo);
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

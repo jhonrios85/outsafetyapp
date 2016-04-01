@@ -146,6 +146,7 @@ public class OutSafetyUtils {
         return BitmapFactory.decodeFile(path, options);
     }
 
+
     public static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight) { // BEST QUALITY MATCH
 
         //First decode with inJustDecodeBounds=true to check dimensions
