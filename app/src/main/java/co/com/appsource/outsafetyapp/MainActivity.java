@@ -181,6 +181,16 @@ public class MainActivity extends AppCompatActivity
 
             Toast.makeText(this, "Las fotos quedarán con baja resolución, debido a que no posee tarjeta SD!!", Toast.LENGTH_LONG).show();
         }
+
+        if (requestCode == 327681) {
+            Uri selectedImageUri = data.getData();
+            UpdateCustomerLogoHazardID(selectedImageUri);
+        }
+
+        if (requestCode == 327691) {
+            Uri selectedImageUri = data.getData();
+            UpdateCustomerPortadaImageHazardID(selectedImageUri);
+        }
     }
 
     @Override
@@ -349,6 +359,36 @@ public class MainActivity extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         transaction.commit();
+    }
+
+    public void UpdateCustomerLogoHazardID(Uri uriImageLogo) {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        Fragment objFragment = null;
+
+        objFragment = fragmentManager.findFragmentByTag(OutSafetyUtils.CONS_FRAG_HAZARD_ID);
+        HazardId objHazardId = null;
+
+        if (objFragment != null) {
+            objHazardId = (HazardId) objFragment;
+            objHazardId.UpdateCustomerLogo(uriImageLogo);
+        }
+    }
+
+    public void UpdateCustomerPortadaImageHazardID(Uri uriImageLogo) {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        Fragment objFragment = null;
+
+        objFragment = fragmentManager.findFragmentByTag(OutSafetyUtils.CONS_FRAG_HAZARD_ID);
+        HazardId objHazardId = null;
+
+        if (objFragment != null) {
+            objHazardId = (HazardId) objFragment;
+            objHazardId.UpdateCustomerPortadaImagae(uriImageLogo);
+        }
     }
 
     public void ShowHazardID() {

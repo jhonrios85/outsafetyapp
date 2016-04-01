@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Outsafety App</string>
 
+
     <string name="title_section_login">Login</string>
     <string name="title_section_sincronizar">Sincronizar</string>
     <string name="title_section_hacer_insp">Inspección</string>
@@ -24,7 +25,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="hint_text_buscar_empresa">Buscar Empresa</string>
     <string name="action_tomar_foto">Tomar Foto</string>
 
     <string name="action_settings">Evidencias</string>
@@ -48,8 +49,12 @@
     <string name="imgv_centro_trabajo">Logo CT</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_logo_empresa">Selecciona Logo Empresa</string>
+    <string name="select_img_portada">Selecciona Imagen Portada</string>
 
     <string name="sync_dw_database">Este proceso envia al servidor las inspecciones realizadas en este equipo y actualiza la base de datos de los centros de trabajo seleccionados para trabajar OFFLINE. El tiempo de sincronización es mayor si selecciona varios CT.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

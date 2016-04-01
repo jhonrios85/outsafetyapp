@@ -38,7 +38,7 @@ import co.com.appsource.outsafetyapp.db_helper.Tables.RiesgoDataSource;
  */
 public class OutSafetyUtils {
 
-    /* INICIO-----CONFIGURACIÓN DE LA APP*/
+    /* INICIO-----CONFIGURACIÓN DEF LA APP*/
     //public static String CONS_SOAP_ADDRESS = "http://186.155.246.211/ws/wsSincronizacion.asmx";
     public static String CONS_SOAP_ADDRESS = "http://www.out-safety.com/wspruebas/wsSincronizacion.asmx"; //Produccion
     //public static String CONS_SOAP_ADDRESS_WRAPPER = "http://186.155.246.211/pruebas/WebServices/WsOutsafetyApp.asmx";
@@ -145,6 +145,7 @@ public class OutSafetyUtils {
 
         return BitmapFactory.decodeFile(path, options);
     }
+
 
     public static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight) { // BEST QUALITY MATCH
 

@@ -4,39 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.github.florent37.materialviewpager.MaterialViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import co.com.appsource.outsafetyapp.model.HazardIdPagerAdapter;
-import co.com.appsource.outsafetyapp.util.OutSafetyUtils;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HazardId.OnFragmentInteractionListener} interface
+ * {@link HazardIdSumario.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link HazardId#newInstance} factory method to
+ * Use the {@link HazardIdSumario#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HazardId extends android.support.v4.app.Fragment {
-
-    ArrayList<String> categories = new ArrayList<String>();
-    View viewHazardId;
-    private MaterialViewPager mViewPager;
-    ViewPager viewPager;
-    HazardIdPagerAdapter objHazardIdPagerAdapter;
-
+public class HazardIdSumario extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -48,7 +29,7 @@ public class HazardId extends android.support.v4.app.Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public HazardId() {
+    public HazardIdSumario() {
         // Required empty public constructor
     }
 
@@ -58,11 +39,11 @@ public class HazardId extends android.support.v4.app.Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HazardId.
+     * @return A new instance of fragment HazardIdSumario.
      */
     // TODO: Rename and change types and number of parameters
-    public static HazardId newInstance(String param1, String param2) {
-        HazardId fragment = new HazardId();
+    public static HazardIdSumario newInstance(String param1, String param2) {
+        HazardIdSumario fragment = new HazardIdSumario();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,57 +60,11 @@ public class HazardId extends android.support.v4.app.Fragment {
         }
     }
 
-    private List<Fragment> buildFragments() {
-        List<android.support.v4.app.Fragment> fragments = new ArrayList<Fragment>();
-        for (int i = 0; i < categories.size(); i++) {
-            Bundle b = new Bundle();
-            b.putInt("position", i);
-            fragments.add(Fragment.instantiate(getContext(), HazardId.class.getName(), b));
-        }
-
-        return fragments;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        //categories.add("Portada");
-
-        viewHazardId = inflater.inflate(R.layout.fragment_hazard_id, container, false);
-        List<Fragment> fragments = buildFragments();
-
-        mViewPager = (MaterialViewPager) viewHazardId.findViewById(R.id.materialViewPager);
-        viewPager = mViewPager.getViewPager();
-        objHazardIdPagerAdapter = new HazardIdPagerAdapter(getContext()
-                , getActivity().getSupportFragmentManager()
-                , fragments
-                , categories);
-        viewPager.setAdapter(objHazardIdPagerAdapter);
-        Bundle b = new Bundle();
-        b.putInt("position", 0);
-
-        objHazardIdPagerAdapter.add(HazardIdPortadaFragment.class, "Portada", b);
-        objHazardIdPagerAdapter.notifyDataSetChanged();
-
-
-        mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
-
-        return viewHazardId;
-    }
-
-    public Fragment getRegisteredFragment(int position) {
-        return (Fragment) objHazardIdPagerAdapter.getItem(position);
-    }
-
-    public void UpdateCustomerLogo(Uri uriImageLogo) {
-        HazardIdPortadaFragment objHazardIdPortadaFragment = (HazardIdPortadaFragment) getRegisteredFragment(0);
-        objHazardIdPortadaFragment.UpdateCustomerLogo(uriImageLogo);
-    }
-
-    public void UpdateCustomerPortadaImagae(Uri uriImageLogo) {
-        HazardIdPortadaFragment objHazardIdPortadaFragment = (HazardIdPortadaFragment) getRegisteredFragment(0);
-        objHazardIdPortadaFragment.UpdateCustomerPortadaImage(uriImageLogo);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_hazard_id_sumario, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
